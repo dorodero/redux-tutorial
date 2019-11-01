@@ -1,6 +1,6 @@
 import * as React from 'react';
 import FilterLink from '../containers/FilterLink';
-import { showAll, showCompleted, showActive } from '../modules/visibilityFilter/SetVisibilityFilter';
+import { showAll, showCompleted, showActive } from '../modules/visibilityFilter/index';
 
 const component: React.FC = () => {
   return (
