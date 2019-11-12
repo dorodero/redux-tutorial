@@ -6,6 +6,8 @@ import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../modules/visibilityFilt
 import TodoList from '../components/TodoList';
 
 const mapStateToProps = (state: AppState) => {
+  // stateのfillterのタイプでTodoListコンポーネントのpropsであるTodosの状態は決めれるので
+  // VisibleTodoListタグには引数となる属性は必要ない
   const filter = () => {
     switch (state.visibilityFilter.visibility.type) {
       case SHOW_ALL:

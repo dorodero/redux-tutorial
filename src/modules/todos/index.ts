@@ -1,6 +1,7 @@
 import { addTodo, AddTodoAction, ADD_TODO } from './AddTodo';
 import { toggleTodo, ToggleTodoAction, TOGGLE_TODO } from './ToggleTodo';
 import { TodoListState } from '../../types';
+import { Reducer } from 'redux';
 
 // Actionの型をまとめた、Actions型をエクスポート
 // 複数ある場合、union型で繋ぐ
@@ -14,7 +15,7 @@ const initialState: TodoListState = {
 // Reducer
 //////////////////
 
-export const reducer = (state: TodoListState = initialState, action: Actions) => {
+export const reducer: Reducer<TodoListState, Actions> = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TODO:
       return {

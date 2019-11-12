@@ -5,6 +5,7 @@ import { actionCreator, AppState, ActionType } from '../modules';
 import Link from '../components/Link';
 import { FilterType } from '../modules/visibilityFilter/index';
 
+// 自身の引数（FiltterLinkタグのfillter属性としてわたってくる）
 type OwnProps = {
   filter: FilterType;
 };
