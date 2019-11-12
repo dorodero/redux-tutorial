@@ -1,35 +1,37 @@
 import * as React from 'react';
 
 type Props = {
-  onSubmit: (text: string) => void;
+  text: string;
+  onSubmit: () => void;
+  onChange: (text: string) => void;
 };
-
-// Refを使用するため、Stateは不要
-// type State = {
-//   value: string; // Inputの中身を保持する。
-// };
 
 const component: React.FC<Props> = props => {
   const textInput = React.createRef<HTMLInputElement>();
 
-  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (textInput.current && textInput.current.value) {
-      props.onSubmit(textInput.current.value);
-      textInput.current.value = '';
+    if (props.text) {
+      props.onSubmit();
     }
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    props.onChange(event.target.value);
   };
 
   return (
     <div>
-      <input ref={textInput} />
-      <button
-        onClick={e => {
-          handleSubmit(e);
-        }}
-      >
-        Add Todo
-      </button>
+      <form onSubmit={e => handleSubmit(e)}>
+        <input
+          onChange={e => {
+            handleChange(e);
+          }}
+          value={props.text}
+        />
+        <button type={'submit'}>Add Todo</button>
+      </form>
     </div>
   );
 };

@@ -6,9 +6,9 @@ import { Action } from 'redux';
 
 // ActionNames
 export const ADD_TODO = 'ADD_TODO' as const;
+export const CHANGE_TEXT = 'CHANGE_TEXT' as const;
 
-export type AddTodoPayload = {
-  // todoを追加する時に必要なのはtodoの内容
+export type CangeTextPayload = {
   text: string;
 };
 
@@ -19,10 +19,18 @@ export type AddTodoPayload = {
 // interfaceでAddTodoActionを定義
 export interface AddTodoAction extends Action {
   type: typeof ADD_TODO;
-  payload: AddTodoPayload;
 }
 
-export const addTodo = (payload: AddTodoPayload): AddTodoAction => ({
+export const addTodo = (): AddTodoAction => ({
   type: ADD_TODO,
+});
+
+export interface ChangeTextAction extends Action {
+  type: typeof CHANGE_TEXT;
+  payload: CangeTextPayload;
+}
+
+export const changeText = (payload: CangeTextPayload): ChangeTextAction => ({
+  type: CHANGE_TEXT,
   payload,
 });
