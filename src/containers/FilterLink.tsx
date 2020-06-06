@@ -28,7 +28,4 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionType>, ownProps: OwnProps) 
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Link);
+export default connect(mapStateToProps, mapDispatchToProps)(Link);

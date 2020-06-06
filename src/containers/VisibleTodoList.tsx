@@ -4,25 +4,17 @@ import { Dispatch } from 'redux';
 import { actionCreator, AppState, ActionType } from '../modules';
 import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../modules/visibilityFilter/index';
 import TodoList from '../components/TodoList';
+import { makeGetVisibleTodos } from '../selectors';
+import { TodoListState, TodoState } from '../types';
 
-const mapStateToProps = (state: AppState) => {
-  // stateのfillterのタイプでTodoListコンポーネントのpropsであるTodosの状態は決めれるので
-  // VisibleTodoListタグには引数となる属性は必要ない
-  const filter = () => {
-    switch (state.visibilityFilter.visibility.type) {
-      case SHOW_ALL:
-        return state.todos.todos;
-      case SHOW_COMPLETED:
-        return state.todos.todos.filter(e => e.completed);
-      case SHOW_ACTIVE:
-        return state.todos.todos.filter(e => !e.completed);
-      default:
-        throw new Error('Unknown filter.');
-    }
+const makeMapStateToProps = () => {
+  const getVisibleTodos = makeGetVisibleTodos();
+  const mapStateToProps = (state: AppState) => {
+    return {
+      todos: getVisibleTodos(state),
+    };
   };
-  return {
-    todos: filter(),
-  };
+  return mapStateToProps;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<ActionType>) => {
@@ -33,7 +25,4 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionType>) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(TodoList);
+export default connect(makeMapStateToProps, mapDispatchToProps)(TodoList);
